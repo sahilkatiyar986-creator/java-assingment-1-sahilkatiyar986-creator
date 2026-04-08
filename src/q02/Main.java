@@ -17,6 +17,7 @@ public class Main {
 
                 num = num * (i - j) / (j + 1);
             }
+
             System.out.println();
         }
     }
