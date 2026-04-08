@@ -1,3 +1,4 @@
+
 import java.util.*;
 
 public class Main {
@@ -6,27 +7,24 @@ public class Main {
         int n = sc.nextInt();
 
         int[][] matrix = new int[n][n];
-
-        int top = 0, bottom = n - 1;
-        int left = 0, right = n - 1;
         int num = 1;
+        int top = 0, bottom = n - 1, left = 0, right = n - 1;
 
-        // Fill spiral matrix
+        // Fill matrix in spiral order
         while (top <= bottom && left <= right) {
-
-            // Top row
+            // left → right
             for (int i = left; i <= right; i++) {
                 matrix[top][i] = num++;
             }
             top++;
 
-            // Right column
+            // top → bottom
             for (int i = top; i <= bottom; i++) {
                 matrix[i][right] = num++;
             }
             right--;
 
-            // Bottom row
+            // right → left
             if (top <= bottom) {
                 for (int i = right; i >= left; i--) {
                     matrix[bottom][i] = num++;
@@ -34,7 +32,7 @@ public class Main {
                 bottom--;
             }
 
-            // Left column
+            // bottom → top
             if (left <= right) {
                 for (int i = bottom; i >= top; i--) {
                     matrix[i][left] = num++;
@@ -44,18 +42,14 @@ public class Main {
         }
 
         // Print matrix
+        int diagonalSum = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 System.out.print(matrix[i][j]);
                 if (j < n - 1) System.out.print(" ");
             }
             System.out.println();
-        }
-
-        // Calculate diagonal sum
-        int diagonalSum = 0;
-        for (int i = 0; i < n; i++) {
-            diagonalSum += matrix[i][i];
+            diagonalSum += matrix[i][i]; // primary diagonal
         }
 
         System.out.println("Diagonal: " + diagonalSum);
